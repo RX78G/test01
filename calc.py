@@ -1,18 +1,26 @@
-# calc.py
+﻿import json
+import pathlib
+ROOT = pathlib.Path(__file__).resolve().parent
+_HISTORY = ROOT / "history.json"
 class Calculator:
-    """四則演算をまとめたシンプルな電卓クラス"""
-
-    def add(self, a: float, b: float) -> float:
-        return a + b
-
-    def sub(self, a: float, b: float) -> float:
-        return a - b
-
-    def mul(self, a: float, b: float) -> float:
-        return a * b
-
-    def div(self, a: float, b: float) -> float:
-        # 0割を防ぐため例外を送出する
+    def add(self, a, b): return a + b
+    def sub(self, a, b): return a - b
+    def mul(self, a, b): return a * b
+    def div(self, a, b):
         if b == 0:
-            raise ZeroDivisionError("division by zero")
+            raise ValueError("ゼロでは割れません")
         return a / b
+    def save(self, op, a, b, result):
+        record = {"op": op, "a": a, "b": b, "result": result}
+        history = []
+        if _HISTORY.exists():
+            history = json.loads(_HISTORY.read_text(encoding="utf-8"))
+        history.append(record)
+        _HISTORY.write_text(
+            json.dumps(history, ensure_ascii=False, indent=2),
+            encoding="utf-8"
+        )
+    def history(self):
+        if _HISTORY.exists():
+            return json.loads(_HISTORY.read_text(encoding="utf-8"))
+        return []
