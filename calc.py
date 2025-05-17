@@ -1,5 +1,16 @@
-def add(a: int, b: int) -> int:
-    return a + b  # a と b の合計を返す
+# calc.py
+class Calculator:
+    """四則演算をまとめたシンプルな電卓クラス"""
 
-def mul(a: int, b: int) -> int:
-    return a * b
+    def add(self, a: float, b: float) -> float:
+        return a + b
+
+    def sub(self, a: float, b: float) -> float:
+        return a - b
+
+    def mul(self, a: float, b: float) -> float:
+        return a * b
+
+    def div(self, a: float, b: float) -> float:
+        # バグ: 0 割の例外処理を入れていない
+        return a / b
