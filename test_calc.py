@@ -1,42 +1,26 @@
-"""Unit tests for Calculator class in calc.py."""
-
 import unittest
-
 from calc import Calculator
 
-
-def _make_test(method_name, a, b, expected):
-    def test(self):
-        calc = Calculator()
-        result = getattr(calc, method_name)(a, b)
-        self.assertEqual(result, expected)
-    return test
-
-
 class TestCalculator(unittest.TestCase):
-    pass
+    def setUp(self):
+        self.calc = Calculator()
 
+    def test_add(self):
+        self.assertEqual(self.calc.add(2, 3), 5)
 
-# Normal operation test cases for each method
-_cases = {
-    "add": (1, 2, 3),
-    "sub": (5, 3, 2),
-    "mul": (2, 3, 6),
-    "div": (8, 2, 4),
-}
+    def test_sub(self):
+        self.assertEqual(self.calc.sub(7, 4), 3)
 
-for _name, _params in _cases.items():
-    test_func = _make_test(_name, *_params)
-    setattr(TestCalculator, f"test_{_name}", test_func)
+    def test_mul(self):
+        self.assertEqual(self.calc.mul(4, 6), 24)
 
-def test_div_zero(self):
-    calc = Calculator()
-    with self.assertRaises(ZeroDivisionError):
-        calc.div(1, 0)
+    def test_div(self):
+        self.assertEqual(self.calc.div(10, 2), 5.0)
 
-
-setattr(TestCalculator, "test_div_zero", test_div_zero)
-
+    def test_div_zero(self):
+        # ゼロ除算は ValueError が発生することを確認
+        with self.assertRaises(ValueError):
+            self.calc.div(1, 0)
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)
