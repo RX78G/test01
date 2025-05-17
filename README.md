@@ -15,3 +15,15 @@ This repository contains several Python scripts demonstrating different features
 python3 mario_game.py
 ```
 Use the **arrow keys** to move and **space** to jump. Avoid the blue enemy block!
+
+## Black-Scholes Simulator
+
+`black_scholes_gui.py` provides an interactive GUI to experiment with the
+Black‑Scholes formula. Sliders allow you to adjust spot price, strike price,
+volatility, risk free rate and time to maturity. The option price updates in
+real time together with a small chart.
+
+Run it with:
+```
+python3 black_scholes_gui.py
+```
