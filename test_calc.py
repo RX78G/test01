@@ -22,5 +22,13 @@ class TestCalculator(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.calc.div(1, 0)
 
+    def test_pow_negative(self):
+        with self.assertRaises(ValueError):
+            self.calc.pow(2, -1)
+
+    def test_pow_zero(self):
+        with self.assertRaises(ValueError):
+            self.calc.pow(2, 0)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

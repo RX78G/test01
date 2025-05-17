@@ -10,6 +10,11 @@ class Calculator:
         if b == 0:
             raise ValueError("ゼロでは割れません")
         return a / b
+    def pow(self, a, b):
+        """a を b 乗する。b が 1 以下なら ValueError"""
+        if b <= 0:
+            raise ValueError("指数は正の数でなければなりません")
+        return a ** b
     def save(self, op, a, b, result):
         record = {"op": op, "a": a, "b": b, "result": result}
         history = []
