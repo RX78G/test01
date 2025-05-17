@@ -12,5 +12,7 @@ class Calculator:
         return a * b
 
     def div(self, a: float, b: float) -> float:
-        # バグ: 0 割の例外処理を入れていない
+        # 0割を防ぐため例外を送出する
+        if b == 0:
+            raise ZeroDivisionError("division by zero")
         return a / b
