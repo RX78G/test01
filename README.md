@@ -27,3 +27,12 @@ Run it with:
 ```
 python3 black_scholes_gui.py
 ```
+
+## Space Shooter Game
+
+`space_shooter.py` is an arcade style shooter. Move the ship with the **left** and **right** arrow keys and press **space** to fire. Destroy all enemies before they reach the bottom.
+
+Run it with:
+```bash
+python3 space_shooter.py
+```
