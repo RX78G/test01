@@ -1,0 +1,5 @@
+# demo.py
+def fizz_buzz(n):
+    """
+    与えられた n までの FizzBuzz をリストで返す
+    """
