@@ -3,10 +3,21 @@ import pathlib
 import tkinter as tk
 from tkinter import ttk
 
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import requests
+try:
+    import pandas as pd
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
+    pd = None
+
+try:
+    import matplotlib.pyplot as plt
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
+    plt = None
+    FigureCanvasTkAgg = None
+try:
+    import requests
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
+    requests = None
 
 CACHE_DIR = pathlib.Path(__file__).resolve().parent / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
@@ -18,6 +29,10 @@ INDICATORS = {
 
 def get_indicator_data(country, indicator, cache_dir=CACHE_DIR):
     """Return DataFrame of indicator data for the given country."""
+    if pd is None:
+        raise ImportError("pandas is required for get_indicator_data")
+    if requests is None:
+        raise ImportError("requests is required for get_indicator_data")
     fname = cache_dir / f"{country}_{indicator}.csv"
     if fname.exists():
         df = pd.read_csv(fname)

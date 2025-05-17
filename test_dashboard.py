@@ -1,6 +1,9 @@
 import unittest
 from unittest.mock import patch, Mock
-import pandas as pd
+try:
+    import pandas as pd
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
+    pd = None
 tempfile = __import__('tempfile')
 from pathlib import Path
 
@@ -12,6 +15,7 @@ SAMPLE_JSON = [
     {"date": "2018", "value": 2},
 ]
 
+@unittest.skipIf(pd is None, "pandas not installed")
 class TestGetIndicatorData(unittest.TestCase):
     def test_load_from_cache(self):
         with tempfile.TemporaryDirectory() as d:
